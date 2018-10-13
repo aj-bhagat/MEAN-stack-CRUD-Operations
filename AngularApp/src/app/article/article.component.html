@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content white-text">
+        <div class="row">
+          <div class="col s5">
+            <form #articleForm="ngForm" (ngSubmit)="onSubmit(articleForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="articleService.selectedarticle._id">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="title" #name="ngModel" [(ngModel)]="articleService.selectedarticle.title" placeholder="Enter the Title" required>
+                  <label>Title :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="url" #name="ngModel" [(ngModel)]="articleService.selectedarticle.url" placeholder="Eg: https://xyz.com" required> 
+                  <label>URL :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <button class="btn btn-custom right" type="button" (click)="resetform(articleForm)">Reset</button>
+                  <button class="btn btn-custom right" type="submit" [disabled]="!articleForm.valid">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col s7">
+              <table class="responsive-table highlight">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>URL</th>
+                    </tr>
+                  </thead>
+                  <tr *ngFor="let art of articleService.article">
+                    <td>{{art.title}}</td>
+                    <td>{{art.url}}</td>
+                    <td>
+                        <a class="action-btn" (click)="onEdit(art)">
+                          <i class="material-icons">edit</i>
+                        </a>
+                        <a class="action-btn" (click)="onDelete(art._id,articleForm)">
+                          <i class="material-icons">delete</i>
+                        </a>
+                      </td>
+                  </tr>
+                </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
